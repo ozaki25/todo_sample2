@@ -3,12 +3,12 @@
 define([
   'underscore',
   'backbone',
-  'models/Todos'
-], function (_, Backbone, TodosModel) {
+  'models/todo'
+], function (_, Backbone, TodoModel) {
   'use strict';
 
   var TodosCollection = Backbone.Collection.extend({
-    model: TodosModel,
+    model: TodoModel,
 
     localStorage: new Backbone.LocalStorage('todos-backbone'),
 
