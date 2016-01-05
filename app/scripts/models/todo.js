@@ -6,7 +6,7 @@ define([
 ], function (_, Backbone) {
   'use strict';
 
-  var BlogModel = Backbone.Model.extend({
+  var TodoModel = Backbone.Model.extend({
     url: '',
 
     initialize: function() {
@@ -23,5 +23,5 @@ define([
     }
   });
 
-  return BlogModel;
+  return TodoModel;
 });

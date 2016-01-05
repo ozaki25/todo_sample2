@@ -6,11 +6,11 @@ define([
 ], function ($, Backbone) {
   'use strict';
 
-  var BlogRouter = Backbone.Router.extend({
+  var TodoRouter = Backbone.Router.extend({
     routes: {
     }
 
   });
 
-  return BlogRouter;
+  return TodoRouter;
 });

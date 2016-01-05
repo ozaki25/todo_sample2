@@ -8,8 +8,8 @@ define([
 ], function ($, _, Backbone, JST) {
   'use strict';
 
-  var BlogView = Backbone.View.extend({
-    template: JST['app/scripts/templates/blog.ejs'],
+  var TodoView = Backbone.View.extend({
+    template: JST['app/scripts/templates/todo.ejs'],
 
     tagName: 'div',
 
@@ -28,5 +28,5 @@ define([
     }
   });
 
-  return BlogView;
+  return TodoView;
 });
