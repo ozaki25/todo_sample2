@@ -9,7 +9,9 @@ define([
   'use strict';
 
   var AppView = Backbone.View.extend({
-    template: JST['app/scripts/templates/app.ejs'],
+    template: '',
+
+    el: '.todoapp',
 
     tagName: 'div',
 
@@ -17,14 +19,47 @@ define([
 
     className: '',
 
-    events: {},
+    events: {
+      'keypress .new-todo': 'createOnEnter'
+    },
 
     initialize: function () {
-      this.listenTo(this.model, 'change', this.render);
+      this.$input = $('.new-todo');
+      this.$list = $('.todo-list');
+
+      this.listenTo(this.collections, 'add', this.addOne);
+      this.listenTo(this.collections, 'reset', this.addAll);
+
+      this.collections.fetch({ reset: true });
     },
 
     render: function () {
-      this.$el.html(this.template(this.model.toJSON()));
+      this.collections.length ? this.$list.show() : this.$list.hide();
+    },
+
+    addOne: function(todo) {
+      var view = new TodoView({ model: todo });
+      this.$list.append(view.render().el);
+    },
+
+    addAll: function() {
+      this.$list.html('');
+      this.collections.each(this.addOne, this);
+    },
+
+    newAttributes: function() {
+      return {
+	       title: this.$input.val().trim(),
+	       order: this.collections.nextOrder(),
+	       completed: false
+      };
+    },
+
+    createOnEnter: function(e) {
+      if(e.which === ENTER_KEY && this.$input.val().trim()) {
+        this.collections.create(this.newAttributes());
+        this.$input.val('');
+      }
     }
   });
 
