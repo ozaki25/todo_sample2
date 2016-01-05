@@ -1,0 +1,13 @@
+{
+  "generator-backbone": {
+    "appPath": "app",
+    "appName": "CrudSample",
+    "testFramework": "mocha",
+    "templateFramework": "lodash",
+    "sassBootstrap": true,
+    "coffee": true,
+    "includeRequireJS": true
+  },
+  "generator-mocha": {},
+  "generator-jasmine": {}
+}
