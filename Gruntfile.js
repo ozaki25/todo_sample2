@@ -36,14 +36,6 @@ module.exports = function (grunt) {
         nospawn: true,
         livereload: LIVERELOAD_PORT
       },
-      coffee: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
-        tasks: ['coffee:dist']
-      },
-      coffeeTest: {
-        files: ['test/spec/{,*/}*.coffee'],
-        tasks: ['coffee:test']
-      },
       sass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['sass:server']
@@ -151,28 +143,6 @@ module.exports = function (grunt) {
         }
       }
     },
-    coffee: {
-      dist: {
-        files: [{
-          // rather than compiling multiple files here you should
-          // require them into your main .coffee file
-          expand: true,
-          cwd: '<%= yeoman.app %>/scripts',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/scripts',
-          ext: '.js'
-        }]
-      },
-      test: {
-        files: [{
-          expand: true,
-          cwd: 'test/spec',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/spec',
-          ext: '.js'
-        }]
-      }
-    },
     sass: {
       options: {
         sourceMap: true,
@@ -210,7 +180,7 @@ module.exports = function (grunt) {
 
           modules: [{name: 'main'}],
 
-          baseUrl: '.tmp/scripts',
+          baseUrl: '<%= yeoman.app %>/scripts',
 
           mainConfigFile: '<%= yeoman.app %>/scripts/main.js', // contains path specifications and nothing else important with respect to config
           dir: '.tmp/scripts',
@@ -351,7 +321,6 @@ module.exports = function (grunt) {
     if (target === 'test') {
       return grunt.task.run([
         'clean:server',
-        'coffee',
         'createDefaultTemplate',
         'jst',
         'sass:server',
@@ -363,7 +332,6 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'coffee:dist',
       'createDefaultTemplate',
       'jst',
       'sass:server',
@@ -377,7 +345,6 @@ module.exports = function (grunt) {
     isConnected = Boolean(isConnected);
     var testTasks = [
         'clean:server',
-        'coffee',
         'createDefaultTemplate',
         'jst',
         'sass',
@@ -395,7 +362,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'coffee',
     'createDefaultTemplate',
     'jst',
     'sass:dist',
